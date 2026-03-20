@@ -8,12 +8,10 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // Use True for port 465, False for 587
+service: 'gmail',
   auth: {
     user: "sumitchaudhary7728@gmail.com",
-    pass: process.env.pass, // Your 16-digit App Password
+    pass: process.env.pass, 
   },
 });
 
