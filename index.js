@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 const transporter = nodemailer.createTransport({
-host: "smtp.gmail.com",
+host: "142.251.2.108",
   port: 587,
   secure: false,
   auth: {
@@ -20,7 +20,8 @@ host: "smtp.gmail.com",
     pass: process.env.pass, 
   },
   tls: {
-    rejectUnauthorized: false // Helps bypass local network certificate issues
+    servername: "smtp.gmail.com",
+    rejectUnauthorized: false
   },
   connectionTimeout: 30000, 
   greetingTimeout: 30000,
@@ -39,6 +40,13 @@ async function sendMail() {
     console.log("Email sent successfully: " + info.messageId);
   } catch (error) {
     console.error("Error sending email:", error);
+    console.log("--- Environment Health Check ---");
+console.log("Node Version:", process.versions.node);
+console.log("Server Port:", process.env.PORT || "Using default 3069");
+console.log("SMTP User:", "sumitchaudhary7728@gmail.com");
+console.log("SMTP Pass Variable:", process.env.pass ? `FOUND (Length: ${process.env.pass.length})` : "NOT FOUND ❌");
+console.log("Database URL:", process.env.url ? "CONNECTED ✅" : "MISSING ❌");
+console.log("-------------------------------");
   }
 }
 
