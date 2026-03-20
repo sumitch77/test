@@ -33,6 +33,7 @@ async function sendMail() {
 }
 sendMail();
 app.use(express.json());
+app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'ind.html'));
