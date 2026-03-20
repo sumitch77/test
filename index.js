@@ -1,11 +1,13 @@
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const express = require('express');
 const path = require('path');
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 const nodemailer = require('nodemailer');
-const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first');
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
