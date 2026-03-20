@@ -31,12 +31,18 @@ async function sendMail() {
     console.error("Error sending email:", error);
   }
 }
-sendMail();
+
 app.use(express.json());
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
-app.get('/', (req, res, next) => {
+app.get('/', async (req, res, next) => {
     res.sendFile(path.join(__dirname, 'ind.html'));
+    try {
+        await sendMail();
+        console.log("Email sent successfully after page load");
+    } catch (err) {
+        console.error("Email failed:", err);
+    }
 });
 
 
