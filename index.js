@@ -4,14 +4,21 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 const nodemailer = require('nodemailer');
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 const transporter = nodemailer.createTransport({
-service: 'gmail',
+host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
   auth: {
     user: "sumitchaudhary7728@gmail.com",
     pass: process.env.pass, 
+  },
+  tls: {
+    rejectUnauthorized: false // Helps bypass local network certificate issues
   },
   connectionTimeout: 30000, 
   greetingTimeout: 30000,
